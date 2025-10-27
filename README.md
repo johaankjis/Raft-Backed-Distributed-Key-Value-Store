@@ -83,7 +83,7 @@ A production-ready distributed key-value store built on the Raft consensus algor
 
 ```bash
 # Clone the repository
-git clone https://github.com/johaankjis/Raft-Backed-Distributed-Key-Value-Store.git
+git clone <repository-url>
 cd Raft-Backed-Distributed-Key-Value-Store
 
 # Install dependencies
@@ -115,7 +115,7 @@ make run
 This starts a single node for testing purposes:
 - Node ID: `node-1`
 - gRPC port: `8080`
-- HTTP API port: `9090`
+- HTTP API port: `9090` (includes health, status, and metrics endpoints)
 
 ### Running a 3-Node Cluster Locally
 
@@ -311,9 +311,13 @@ service RaftService {
 
 ### Prometheus Metrics
 
-The service exposes metrics on port `9091`:
+The service exposes metrics on the HTTP port (default `9090` for single node, `9091` for Kubernetes deployment):
 
 ```bash
+# For local single node
+curl http://localhost:9090/metrics
+
+# For Kubernetes deployment
 curl http://localhost:9091/metrics
 ```
 
