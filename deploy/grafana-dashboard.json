@@ -1,0 +1,78 @@
+{
+  "dashboard": {
+    "title": "Raft KV Store Metrics",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Leader Elections",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(raft_leader_elections_total[5m])",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "AppendEntries RPC Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(raft_append_entries_total[5m])",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Committed Entries",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "raft_committed_entries_total",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Current Term",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "raft_current_term",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Leader Status",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "raft_is_leader",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Write Throughput",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(raft_committed_entries_total[1m])",
+            "legendFormat": "ops/sec"
+          }
+        ]
+      }
+    ],
+    "refresh": "5s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    }
+  }
+}
